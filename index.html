@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline'; style-src 'self' 'unsafe-inline'">
+<title>Pelacak Menstruasi</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div>
+      <h1>Pelacak Menstruasi 🌸</h1>
+      <p class="hello" id="hello"></p>
+    </div>
+  </header>
+  <nav class="actions">
+    <button class="ghost" id="btnInfo">💡 Info</button>
+    <button class="ghost" id="btnHist">📖 Riwayat</button>
+    <button class="ghost" id="btnSet">⚙️ Atur</button>
+  </nav>
+
+  <section class="summary" id="summary" aria-live="polite"></section>
+
+  <section class="cal">
+    <div class="nav">
+      <button id="prev" class="ghost" aria-label="Bulan sebelumnya">‹</button>
+      <h2 id="monthLabel"></h2>
+      <button id="next" class="ghost" aria-label="Bulan berikutnya">›</button>
+    </div>
+    <div class="grid dow"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+    <div class="grid" id="days"></div>
+    <ul class="legend">
+      <li><i class="k period"></i>Haid</li>
+      <li><i class="k pred"></i>Prediksi haid</li>
+      <li><i class="k fertile"></i>Masa subur</li>
+      <li><i class="k ovu"></i>Ovulasi</li>
+    </ul>
+  </section>
+</main>
+
+<div class="sheet-bg" id="bg" hidden></div>
+
+<section class="sheet" id="sheet" hidden aria-label="Catatan harian">
+  <h3 id="sheetDate"></h3>
+  <p id="sheetInfo" class="muted"></p>
+  <button id="btnStart" class="primary"></button>
+  <h4>Nyeri</h4>
+  <div class="chips" id="painChips"></div>
+  <h4>Mood hari ini</h4>
+  <div class="chips" id="moodChips"></div>
+  <h4>Catatan</h4>
+  <textarea id="note" rows="2" placeholder="Kram, sakit kepala, dll."></textarea>
+  <div class="row">
+    <button id="btnClose" class="ghost">Tutup</button>
+    <button id="btnSave" class="primary">Simpan catatan 💾</button>
+  </div>
+</section>
+
+<section class="sheet" id="histSheet" hidden aria-label="Riwayat siklus">
+  <h3>📖 Riwayat Siklus</h3>
+  <p class="muted">Dibandingkan dengan prediksi rata-rata siklusmu.</p>
+  <div id="histList"></div>
+  <div class="row"><button class="ghost closeBtn">Tutup</button></div>
+</section>
+
+<section class="sheet" id="infoSheet" hidden aria-label="Info">
+  <h3>💡 Info Aplikasi</h3>
+  <h4>Arti warna</h4>
+  <ul class="info">
+    <li><i class="k period"></i> Haid yang kamu catat</li>
+    <li><i class="k pred"></i> Perkiraan haid berikutnya</li>
+    <li><i class="k fertile"></i> Masa subur (5 hari sebelum sampai 1 hari setelah ovulasi)</li>
+    <li><i class="k ovu"></i> Perkiraan hari ovulasi (14 hari sebelum haid berikutnya)</li>
+  </ul>
+  <h4>Cara kerja</h4>
+  <p class="muted">Awalnya aplikasi memakai siklus 28 hari. Setelah kamu mencatat 2 haid atau lebih, aplikasi memakai rata-rata siklusmu sendiri.</p>
+  <h4>Status riwayat</h4>
+  <p class="muted">✅ Tepat waktu: selisih 1 hari atau kurang<br>⏳ Terlambat: haid datang lebih lambat dari prediksi<br>⚡ Maju: haid datang lebih cepat dari prediksi</p>
+  <p class="muted">Prediksi hanya perkiraan, bukan alat kontrasepsi atau diagnosis medis. Jika siklusmu sangat tidak teratur, konsultasikan ke dokter. 💗</p>
+  <div class="row"><button class="ghost closeBtn">Tutup</button></div>
+</section>
+
+<section class="sheet" id="settings" hidden aria-label="Pengaturan">
+  <h3>⚙️ Pengaturan</h3>
+  <label>Nama panggilan<input type="text" id="setName" maxlength="20"></label>
+  <label>Panjang siklus (hari)<input type="number" id="setCycle" min="21" max="45"></label>
+  <label>Lama haid (hari)<input type="number" id="setPlen" min="2" max="10"></label>
+  <div class="row">
+    <button id="btnReset" class="ghost danger">Hapus data</button>
+    <button id="btnSetSave" class="primary">Simpan</button>
+  </div>
+  <div class="row"><button class="ghost closeBtn">Tutup</button></div>
+</section>
+
+<div class="welcome" id="welcome" hidden>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+  <div class="wcard">
+    <div class="wemoji" aria-hidden="true">🌸</div>
+    <div id="wAsk">
+      <h2>Hai, cantik! 💕</h2>
+      <p class="muted">Siapa nama panggilanmu?</p>
+      <input type="text" id="wName" maxlength="20" placeholder="Tulis namamu" autocomplete="off">
+      <button id="wGo" class="primary">Mulai ✨</button>
+    </div>
+    <div id="wHi" hidden>
+      <h2 id="wHiText" class="hiname"></h2>
+      <p class="muted">Selamat datang di Pelacak Menstruasi 🌷</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+<script src="cordova.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
