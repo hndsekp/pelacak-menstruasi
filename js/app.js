@@ -135,7 +135,7 @@
     while (day > c) { last = add(last, c); day = diff(today, last) + 1; }
     var next = add(last, c), left = diff(next, today);// haid berikutnya & sisa hari
     var tag = marks[t] && marks[t].ovu ? '🥚 Hari ovulasi' : (marks[t] && marks[t].fertile ? '🌱 Masa subur' : '');
-    el.innerHTML = '<p class="big">Hari ke' + day + '</p>' +
+    el.innerHTML = '<p class="big">Hari ke -' + day + '</p>' +
       '<p>' + (left === 0 ? 'Haid diperkirakan mulai hari ini' : 'Haid berikutnya ' + left + ' hari lagi (' + nice(next) + ')') + '</p>' +
       '<p>Rata-rata siklus: ' + c + ' hari</p>' + (tag ? '<span class="tag">' + tag + '</span>' : '');
   }
